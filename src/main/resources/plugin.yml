@@ -1,0 +1,6 @@
+name: InteractLog
+version: '${project.version}'
+main: me.joshios.interactlog.InteractLog
+api-version: 1.18
+commands:
+  logs:
