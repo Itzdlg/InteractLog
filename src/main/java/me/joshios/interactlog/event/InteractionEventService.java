@@ -2,7 +2,7 @@ package me.joshios.interactlog.event;
 
 import me.joshios.interactlog.log.InteractionLog;
 import me.joshios.interactlog.user.InteractionUser;
-import me.joshios.interactlog.user.InteractionUserRepository;
+import me.joshios.interactlog.user.Repository;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -11,10 +11,10 @@ import java.util.UUID;
 
 public class InteractionEventService {
 
-    private final InteractionUserRepository repository;
+    private final Repository<UUID, InteractionUser> repository;
     private final EventLogFactory eventLogFactory;
 
-    public InteractionEventService(InteractionUserRepository repository) {
+    public InteractionEventService(Repository<UUID, InteractionUser> repository) {
         this.repository = repository;
         this.eventLogFactory = new EventLogFactory();
     }

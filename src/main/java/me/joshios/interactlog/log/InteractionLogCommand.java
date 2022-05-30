@@ -2,7 +2,7 @@ package me.joshios.interactlog.log;
 
 import me.joshios.interactlog.gui.InteractEventGui;
 import me.joshios.interactlog.user.InteractionUser;
-import me.joshios.interactlog.user.InteractionUserRepository;
+import me.joshios.interactlog.user.Repository;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,12 +12,13 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class InteractionLogCommand implements CommandExecutor {
 
-    private final InteractionUserRepository repository;
+    private final Repository<UUID, InteractionUser> repository;
 
-    public InteractionLogCommand(InteractionUserRepository repository) {
+    public InteractionLogCommand(Repository<UUID, InteractionUser> repository) {
         this.repository = repository;
     }
 

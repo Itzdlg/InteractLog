@@ -4,9 +4,13 @@ import me.joshios.interactlog.event.InteractionEventService;
 import me.joshios.interactlog.event.types.InventoryEventListener;
 import me.joshios.interactlog.event.types.ItemDropListener;
 import me.joshios.interactlog.log.InteractionLogCommand;
+import me.joshios.interactlog.user.InteractionUser;
 import me.joshios.interactlog.user.InteractionUserRepository;
+import me.joshios.interactlog.user.Repository;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.UUID;
 
 public final class InteractLog extends JavaPlugin {
 
@@ -14,7 +18,7 @@ public final class InteractLog extends JavaPlugin {
     public void onEnable() {
         getLogger().info("Enabling InteractLog " + getDescription().getVersion() + " created by Joshios");
 
-        InteractionUserRepository repository = new InteractionUserRepository();
+        Repository<UUID, InteractionUser> repository = new InteractionUserRepository();
         InteractionEventService service = new InteractionEventService(repository);
 
         registerEvents(
