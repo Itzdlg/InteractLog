@@ -13,7 +13,6 @@ public class InteractionLog {
     private final LocalDateTime timeStamp;
 
     public InteractionLog(ItemStack itemStack, EventAction eventAction, LocalDateTime timeStamp) {
-
         this.itemStack = itemStack;
         this.eventAction = eventAction;
         this.timeStamp = timeStamp;

@@ -19,6 +19,7 @@ import java.util.List;
 public class InteractEventGui {
 
     private final PaginatedGui gui;
+
     public InteractEventGui(Player selectedPlayer) {
         this.gui = Gui.paginated()
                 .rows(6)
