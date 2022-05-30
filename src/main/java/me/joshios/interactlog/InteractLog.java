@@ -1,5 +1,6 @@
 package me.joshios.interactlog;
 
+import me.joshios.interactlog.event.EventLogFactory;
 import me.joshios.interactlog.event.InteractionEventService;
 import me.joshios.interactlog.event.types.InventoryEventListener;
 import me.joshios.interactlog.event.types.ItemDropListener;
@@ -19,11 +20,13 @@ public final class InteractLog extends JavaPlugin {
         getLogger().info("Enabling InteractLog " + getDescription().getVersion() + " created by Joshios");
 
         Repository<UUID, InteractionUser> repository = new InteractionUserRepository();
-        InteractionEventService service = new InteractionEventService(repository);
+        EventLogFactory eventLogFactory = new EventLogFactory();
+
+        InteractionEventService service = new InteractionEventService(repository, eventLogFactory);
 
         registerEvents(
-            new ItemDropListener(service),
-            new InventoryEventListener(service)
+                new ItemDropListener(service),
+                new InventoryEventListener(service)
         );
 
         getCommand("logs").setExecutor(new InteractionLogCommand(repository));

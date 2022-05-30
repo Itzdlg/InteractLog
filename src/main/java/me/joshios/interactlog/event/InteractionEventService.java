@@ -12,11 +12,11 @@ import java.util.UUID;
 public class InteractionEventService {
 
     private final Repository<UUID, InteractionUser> repository;
-    private final EventLogFactory eventLogFactory;
+    private final EventLogFactory logFactory;
 
-    public InteractionEventService(Repository<UUID, InteractionUser> repository) {
+    public InteractionEventService(Repository<UUID, InteractionUser> repository, EventLogFactory logFactory) {
         this.repository = repository;
-        this.eventLogFactory = new EventLogFactory();
+        this.logFactory = logFactory;
     }
 
     public void submitLog(UUID uuid, InteractionLog log) {
@@ -26,7 +26,7 @@ public class InteractionEventService {
 
         submitSilentLog(uuid, log);
 
-        TextComponent component = eventLogFactory.assembleMessage(uuid, log);
+        TextComponent component = logFactory.assembleMessage(uuid, log);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (!player.hasPermission("interactlog.notify")) {
