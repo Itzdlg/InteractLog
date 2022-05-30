@@ -45,13 +45,13 @@ public class InteractionEventService {
             return;
         }
 
-        repository.getUser(uuid).ifPresentOrElse(user -> {
+        repository.get(uuid).ifPresentOrElse(user -> {
             user.addLog(log);
         }, () -> {
             InteractionUser user = new InteractionUser(uuid);
             user.addLog(log);
 
-            repository.createUser(user);
+            repository.add(user);
         });
     }
 

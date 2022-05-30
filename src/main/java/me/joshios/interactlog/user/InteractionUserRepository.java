@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class InteractionUserRepository {
+public class InteractionUserRepository implements Repository<UUID, InteractionUser> {
 
     private final List<InteractionUser> userList;
 
@@ -13,21 +13,24 @@ public class InteractionUserRepository {
         this.userList = new ArrayList<>();
     }
 
-    public void createUser(InteractionUser user) {
-        if (isExisting(user.getUuid())) {
+    @Override
+    public void add(InteractionUser user) {
+        if (exists(user.getUuid())) {
             return;
         }
 
         userList.add(user);
     }
 
-    public void removeUser(UUID uuid) {
-        Optional<InteractionUser> user = getUser(uuid);
+    @Override
+    public void remove(UUID uuid) {
+        Optional<InteractionUser> user = get(uuid);
 
         user.ifPresent(userList::remove);
     }
 
-    public Optional<InteractionUser> getUser(UUID uuid) {
+    @Override
+    public Optional<InteractionUser> get(UUID uuid) {
         if (uuid == null) {
             return Optional.empty();
         }
@@ -35,7 +38,8 @@ public class InteractionUserRepository {
         return userList.stream().filter(user -> user.getUuid().equals(uuid)).findFirst();
     }
 
-    public boolean isExisting(UUID uuid) {
-        return getUser(uuid).isPresent();
+    @Override
+    public boolean exists(UUID uuid) {
+        return get(uuid).isPresent();
     }
 }

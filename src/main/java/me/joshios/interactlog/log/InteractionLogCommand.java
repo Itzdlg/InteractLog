@@ -38,7 +38,7 @@ public class InteractionLogCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        Optional<InteractionUser> userOptional = repository.getUser(selectedPlayer.getUniqueId());
+        Optional<InteractionUser> userOptional = repository.get(selectedPlayer.getUniqueId());
 
         userOptional.ifPresentOrElse(user -> {
             InteractEventGui eventGui = new InteractEventGui(selectedPlayer);
