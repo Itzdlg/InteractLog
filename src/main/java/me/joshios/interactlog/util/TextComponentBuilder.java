@@ -10,10 +10,10 @@ public class TextComponentBuilder {
     private TextComponent component;
     private String text;
 
-    private String click;
+    private String clickText;
     private ClickEvent.Action clickAction;
 
-    private String hover;
+    private String hoverText;
     private HoverEvent.Action hoverAction;
 
     public TextComponentBuilder() {
@@ -25,8 +25,9 @@ public class TextComponentBuilder {
     }
 
     public TextComponentBuilder click(String clickText, ClickEvent.Action action) {
-        click = clickText;
-        clickAction = action;
+        this.clickText = clickText;
+        this.clickAction = action;
+
         return this;
     }
 
@@ -35,13 +36,15 @@ public class TextComponentBuilder {
     }
 
     public TextComponentBuilder hover(String hoverText, HoverEvent.Action action) {
-        hover = hoverText;
-        hoverAction = action;
+        this.hoverText = hoverText;
+        this.hoverAction = action;
+
         return this;
     }
 
     public TextComponentBuilder text(String message) {
-        text = message;
+        this.text = message;
+
         return this;
     }
 
@@ -52,22 +55,22 @@ public class TextComponentBuilder {
 
         TextComponent textComponent = new TextComponent(text);
 
-        if (hover != null) {
+        if (hoverText != null) {
             HoverEvent.Action hoverAction = this.hoverAction == null ? HoverEvent.Action.SHOW_TEXT : this.hoverAction;
-            textComponent.setHoverEvent(new HoverEvent(hoverAction, new Text(this.hover)));
+            textComponent.setHoverEvent(new HoverEvent(hoverAction, new Text(this.hoverText)));
         }
 
-        if (click != null) {
+        if (clickText != null) {
             ClickEvent.Action clickAction = this.clickAction == null ? ClickEvent.Action.RUN_COMMAND : this.clickAction;
-            textComponent.setClickEvent(new ClickEvent(clickAction, click));
+            textComponent.setClickEvent(new ClickEvent(clickAction, clickText));
         }
 
         component.addExtra(textComponent);
 
         text = null;
-        click = null;
+        clickText = null;
         clickAction = null;
-        hover = null;
+        hoverText = null;
         hoverAction = null;
 
         return this;
